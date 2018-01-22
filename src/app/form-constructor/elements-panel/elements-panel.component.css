@@ -1,0 +1,8 @@
+.elements-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.element {
+  padding: 10px;
+}
