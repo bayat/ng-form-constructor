@@ -23,8 +23,10 @@ export class ConstructorZoneComponent implements OnInit {
   }
 
   drop(e) {
+    if (e.target.className.indexOf('cz-content') === -1) {
+      return;
+    }
     e.preventDefault();
-    console.info(e, 'CZONE dropEvent');
     const dataTransfer = e.dataTransfer;
     const type = dataTransfer.getData('type');
     const data = JSON.parse(dataTransfer.getData('data'));
