@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ElementType} from '../enums/element-type.enum';
-import {CzFieldComponent} from '../form-constructor/constructor-zone/cz-field/cz-field.component';
-import {CzSetComponent} from '../form-constructor/constructor-zone/cz-set/cz-set.component';
+import {Subject} from 'rxjs/Subject';
 
 export class FieldConfig {
   name: string;
@@ -12,6 +10,7 @@ export class FieldConfig {
 
 @Injectable()
 export class FormConstructorService {
+  currentElementChanged$ = new Subject<any>();
 
   constructor() {
   }
@@ -24,14 +23,6 @@ export class FormConstructorService {
       {name: 'responsible', type: 'responsible', label: 'Ответственный', options: ''},
       {name: 'dueDate', type: 'date', label: 'Выполнить до', options: ''}
     ];
-  }
-
-  getComponentByType(type: ElementType) {
-    if (type == ElementType.FIELD) {
-      return CzFieldComponent;
-    } else {
-      return CzSetComponent;
-    }
   }
 
 }

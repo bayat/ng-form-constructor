@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {FormConstructorService} from '../../services/form-constructor.service';
 
 @Component({
   selector: 'app-prop-editor',
@@ -8,10 +9,11 @@ import {Component, OnInit} from '@angular/core';
 export class PropEditorComponent implements OnInit {
   private element;
 
-  constructor() {
+  constructor(private formConstructorService: FormConstructorService) {
   }
 
   ngOnInit() {
+    this.formConstructorService.currentElementChanged$.subscribe(data => this.setElement(data));
   }
 
   setElement(elem) {

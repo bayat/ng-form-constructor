@@ -65,6 +65,12 @@ app-cz-column {
   margin: 10px 0;
 }
 
+.cz-field {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 10px;
+}
+
 app-prop-editor {
   flex: 1 1 20%;
 }

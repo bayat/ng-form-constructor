@@ -1,3 +1,18 @@
-<p>
-  prop-editor works!
-</p>
+<ng-container *ngIf="element">
+  <div>
+    <span>Название поля</span>
+    <span>{{element.name}}</span>
+  </div>
+  <div>
+    <span>Заголовок</span>
+    <input type="text" [(ngModel)]="element.label"/>
+  </div>
+  <div>
+    <span>Тип</span>
+    <input type="text" [(ngModel)]="element.type"/>
+  </div>
+  <div>
+    <span>Опции</span>
+    <input type="text" [(ngModel)]="element.options"/>
+  </div>
+</ng-container>
