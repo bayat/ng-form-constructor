@@ -10,6 +10,7 @@ import {ConstructorZoneComponent} from './form-constructor/constructor-zone/cons
 import {ElementsPanelComponent} from './form-constructor/elements-panel/elements-panel.component';
 import {FieldElementComponent} from './form-constructor/elements-panel/field-element/field-element.component';
 import {FormConstructorService} from './services/form-constructor.service';
+import { SetElementComponent } from './form-constructor/elements-panel/set-element/set-element.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {FormConstructorService} from './services/form-constructor.service';
     PropEditorComponent,
     ConstructorZoneComponent,
     ElementsPanelComponent,
-    FieldElementComponent
+    FieldElementComponent,
+    SetElementComponent
   ],
   imports: [
     BrowserModule,

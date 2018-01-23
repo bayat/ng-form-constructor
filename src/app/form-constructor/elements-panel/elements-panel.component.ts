@@ -23,10 +23,5 @@ export class ElementsPanelComponent implements OnInit {
     this.fields = this.formConstructorService.getFields();
   }
 
-  drag(e, type) {
-    console.info(e, 'event');
-    console.info(type, 'type');
-  }
-
 
 }

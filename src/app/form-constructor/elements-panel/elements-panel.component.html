@@ -1,14 +1,6 @@
 <ul class="elements-container">
-  <li class="element set-element col-1" draggable="true" (dragstart)="drag($event, 'fieldset')">Сет с одной колонкой
-  </li>
-  <li class="element set-element col-2" draggable="true" (dragstart)="drag($event, 'fieldset')">Сет с двумя
-    колонками
-  </li>
-  <li class="element set-element col-3" draggable="true" (dragstart)="drag($event, 'fieldset')">Сет с тремя
-    колонками
-  </li>
-
-  <ng-container *ngFor="let field of fields">
-    <app-field-element [config]="field"></app-field-element>
-  </ng-container>
+  <app-set-element [columns]="1" [title]="'Сет с одной колонкой'"></app-set-element>
+  <app-set-element [columns]="2" [title]="'Сет с двумя колонками'"></app-set-element>
+  <app-set-element [columns]="3" [title]="'Сет с тремя колонками'"></app-set-element>
+  <app-field-element *ngFor="let field of fields" [config]="field"></app-field-element>
 </ul>

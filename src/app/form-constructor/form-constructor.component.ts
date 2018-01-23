@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {PropEditorComponent} from './prop-editor/prop-editor.component';
 
 @Component({
   selector: 'app-form-constructor',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-constructor.component.css']
 })
 export class FormConstructorComponent implements OnInit {
+  @ViewChild(PropEditorComponent) editor: PropEditorComponent;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  setCurrentElement(event) {
+    this.editor.setElement(event);
   }
 
 }

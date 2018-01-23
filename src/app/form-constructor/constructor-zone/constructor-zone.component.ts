@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-constructor-zone',
@@ -6,6 +6,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./constructor-zone.component.css']
 })
 export class ConstructorZoneComponent implements OnInit {
+  @Output() onClicked = new EventEmitter<any>();
+
   constructor() {
   }
 
@@ -15,6 +17,9 @@ export class ConstructorZoneComponent implements OnInit {
   drop(e) {
     e.preventDefault();
     console.info(e, 'dropEvent');
+    const dataTransfer = e.dataTransfer;
+    const type = dataTransfer.getData('type');
+    const data = JSON.parse(dataTransfer.getData('data'));
   }
 
 }

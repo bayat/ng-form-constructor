@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-prop-editor',
@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./prop-editor.component.css']
 })
 export class PropEditorComponent implements OnInit {
+  private element;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  setElement(elem) {
+    console.info()
+    this.element = elem;
   }
 
 }
