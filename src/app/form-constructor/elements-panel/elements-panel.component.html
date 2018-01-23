@@ -1,6 +1,4 @@
-<ul class="elements-container">
-  <app-set-element [columns]="1" [title]="'Сет с одной колонкой'"></app-set-element>
-  <app-set-element [columns]="2" [title]="'Сет с двумя колонками'"></app-set-element>
-  <app-set-element [columns]="3" [title]="'Сет с тремя колонками'"></app-set-element>
-  <app-field-element *ngFor="let field of fields" [config]="field"></app-field-element>
-</ul>
+<app-set-element [columns]="1" [title]="'Сет с одной колонкой'"></app-set-element>
+<app-set-element [columns]="2" [title]="'Сет с двумя колонками'"></app-set-element>
+<app-set-element [columns]="3" [title]="'Сет с тремя колонками'"></app-set-element>
+<app-field-element *ngFor="let field of fields" [config]="field"></app-field-element>
