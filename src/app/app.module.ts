@@ -9,8 +9,11 @@ import {PropEditorComponent} from './form-constructor/prop-editor/prop-editor.co
 import {ConstructorZoneComponent} from './form-constructor/constructor-zone/constructor-zone.component';
 import {ElementsPanelComponent} from './form-constructor/elements-panel/elements-panel.component';
 import {FieldElementComponent} from './form-constructor/elements-panel/field-element/field-element.component';
+import {SetElementComponent} from './form-constructor/elements-panel/set-element/set-element.component';
 import {FormConstructorService} from './services/form-constructor.service';
-import { SetElementComponent } from './form-constructor/elements-panel/set-element/set-element.component';
+import {DropZoneDirective} from './form-constructor/drop-zone.directive';
+import {CzSetComponent} from './form-constructor/constructor-zone/cz-set/cz-set.component';
+import {CzFieldComponent} from './form-constructor/constructor-zone/cz-field/cz-field.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { SetElementComponent } from './form-constructor/elements-panel/set-eleme
     ConstructorZoneComponent,
     ElementsPanelComponent,
     FieldElementComponent,
-    SetElementComponent
+    SetElementComponent,
+    DropZoneDirective,
+    CzSetComponent,
+    CzFieldComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +34,7 @@ import { SetElementComponent } from './form-constructor/elements-panel/set-eleme
     HttpModule
   ],
   providers: [FormConstructorService],
+  entryComponents: [CzSetComponent, CzFieldComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
