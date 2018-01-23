@@ -15,8 +15,7 @@ export class ConstructorZoneComponent implements OnInit {
   @Output() onClicked = new EventEmitter<any>();
   @ViewChild(DropZoneDirective) dropZone: DropZoneDirective;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver,
-              private formConstructorService: FormConstructorService) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit() {

@@ -15,7 +15,6 @@ export class PropEditorComponent implements OnInit {
   }
 
   setElement(elem) {
-    console.info()
     this.element = elem;
   }
 

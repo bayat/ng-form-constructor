@@ -15,4 +15,11 @@ export class CzFieldComponent implements OnInit, CzComponent {
   ngOnInit() {
   }
 
+  drag(e) {
+    console.info(e, 'field drag event');
+  }
+
+  clickOnField(e) {
+  }
+
 }

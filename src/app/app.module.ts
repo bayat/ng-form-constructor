@@ -14,6 +14,7 @@ import {FormConstructorService} from './services/form-constructor.service';
 import {DropZoneDirective} from './form-constructor/drop-zone.directive';
 import {CzSetComponent} from './form-constructor/constructor-zone/cz-set/cz-set.component';
 import {CzFieldComponent} from './form-constructor/constructor-zone/cz-field/cz-field.component';
+import { CzColumnComponent } from './form-constructor/constructor-zone/cz-column/cz-column.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {CzFieldComponent} from './form-constructor/constructor-zone/cz-field/cz-
     DropZoneDirective,
     CzSetComponent,
     CzFieldComponent,
+    CzColumnComponent,
   ],
   imports: [
     BrowserModule,

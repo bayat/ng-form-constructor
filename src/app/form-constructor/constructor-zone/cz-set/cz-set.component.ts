@@ -17,7 +17,6 @@ export class CzSetComponent implements OnInit, CzComponent {
   }
 
   createRange() {
-    console.info(this.data, 'setData');
     const items = [];
     for (let i = 0; i < this.data.columns; i++) {
       items.push(i);

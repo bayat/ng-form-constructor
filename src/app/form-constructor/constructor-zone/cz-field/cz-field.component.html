@@ -1,3 +1,4 @@
-<p>
-  cz-field works!
-</p>
+<div class="cz-field" draggable="true" (dragstart)="drag($event)" (click)="clickOnField($event)">
+  <label>{{data.label}}</label>
+  <input [attr.value]="data.name"/>
+</div>
