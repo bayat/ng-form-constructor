@@ -10,6 +10,7 @@ import {ElementType} from '../../../enums/element-type.enum';
   encapsulation: ViewEncapsulation.None
 })
 export class CzSetComponent implements OnInit, CzComponent {
+  ref: any;
   data: any;
 
   constructor(private formConstructorService: FormConstructorService) {
@@ -27,7 +28,9 @@ export class CzSetComponent implements OnInit, CzComponent {
   }
 
   changeSelectedElement() {
-    this.formConstructorService.currentElementChanged$.next({'type': ElementType.SET, 'config': this.data});
+    this.formConstructorService.currentElementChanged$.next(
+      {'type': ElementType.SET, 'config': this.data, 'componentRef': this.ref}
+    );
   }
 
 

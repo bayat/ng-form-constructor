@@ -10,6 +10,7 @@ import {ElementType} from '../../enums/element-type.enum';
 export class PropEditorComponent implements OnInit {
   private config;
   private configType: ElementType;
+  private componentRef: any;
   private elementTypeEnum = ElementType;
 
   constructor(private formConstructorService: FormConstructorService) {
@@ -19,6 +20,7 @@ export class PropEditorComponent implements OnInit {
     this.formConstructorService.currentElementChanged$.subscribe(data => {
       this.setConfig(data.config);
       this.setConfigType(data.type);
+      this.setComponentRef(data.componentRef);
     });
   }
 
@@ -28,6 +30,21 @@ export class PropEditorComponent implements OnInit {
 
   setConfigType(type: ElementType) {
     this.configType = type;
+  }
+
+  setComponentRef(componentRef: any) {
+    this.componentRef = componentRef;
+  }
+
+  deleteComponent() {
+    this.componentRef.destroy();
+    this.clear();
+  }
+
+  clear() {
+    this.setConfig(null);
+    this.setConfigType(null);
+    this.setComponentRef(null);
   }
 
 }

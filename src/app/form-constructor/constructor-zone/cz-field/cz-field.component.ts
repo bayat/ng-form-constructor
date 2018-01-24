@@ -10,6 +10,7 @@ import {ElementType} from '../../../enums/element-type.enum';
   encapsulation: ViewEncapsulation.None
 })
 export class CzFieldComponent implements OnInit, CzComponent {
+  ref: any;
   @Input() data: any;
 
   constructor(private formConstructorService: FormConstructorService) {
@@ -23,7 +24,7 @@ export class CzFieldComponent implements OnInit, CzComponent {
   }
 
   changeSelectedElement(e) {
-    this.formConstructorService.currentElementChanged$.next({'type': ElementType.FIELD, 'config': this.data});
+    this.formConstructorService.currentElementChanged$.next({'type': ElementType.FIELD, 'config': this.data, 'componentRef': this.ref});
     e.stopPropagation();
   }
 }

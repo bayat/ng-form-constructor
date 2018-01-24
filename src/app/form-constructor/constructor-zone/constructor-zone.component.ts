@@ -35,6 +35,7 @@ export class ConstructorZoneComponent implements OnInit {
       const componentFactory = this.componentFactoryResolver.resolveComponentFactory(CzSetComponent);
       const componentRef = viewContainerRef.createComponent(componentFactory);
       (<CzComponent>componentRef.instance).data = data;
+      (<CzComponent>componentRef.instance).ref = componentRef;
     }
   }
 

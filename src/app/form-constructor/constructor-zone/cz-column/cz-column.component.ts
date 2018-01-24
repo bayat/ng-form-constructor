@@ -30,6 +30,7 @@ export class CzColumnComponent implements OnInit {
       const componentFactory = this.componentFactoryResolver.resolveComponentFactory(CzFieldComponent);
       const componentRef = viewContainerRef.createComponent(componentFactory);
       (<CzComponent>componentRef.instance).data = data;
+      (<CzComponent>componentRef.instance).ref = componentRef;
     }
     e.stopPropagation();
   }
