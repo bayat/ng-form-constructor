@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {CzComponent} from '../cz-component';
+import {FormConstructorService} from '../../../services/form-constructor.service';
+import {ElementType} from '../../../enums/element-type.enum';
 
 @Component({
   selector: 'app-cz-set',
@@ -10,7 +12,7 @@ import {CzComponent} from '../cz-component';
 export class CzSetComponent implements OnInit, CzComponent {
   data: any;
 
-  constructor() {
+  constructor(private formConstructorService: FormConstructorService) {
   }
 
   ngOnInit() {
@@ -23,5 +25,10 @@ export class CzSetComponent implements OnInit, CzComponent {
     }
     return items;
   }
+
+  changeSelectedElement() {
+    this.formConstructorService.currentElementChanged$.next({'type': ElementType.SET, 'config': this.data});
+  }
+
 
 }

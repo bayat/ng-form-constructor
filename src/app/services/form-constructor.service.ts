@@ -1,6 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 
+export class FormConfig {
+  sets: SetConfig[] = [];
+}
+
+export class SetConfig {
+  legend: string;
+  columns: ColumnConfig[] = [];
+}
+
+export class ColumnConfig {
+  fields: FieldConfig[] = [];
+}
+
 export class FieldConfig {
   name: string;
   type: string;

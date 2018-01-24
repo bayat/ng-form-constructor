@@ -1,18 +1,32 @@
-<ng-container *ngIf="element">
-  <div>
-    <span>Название поля</span>
-    <span>{{element.name}}</span>
-  </div>
-  <div>
-    <span>Заголовок</span>
-    <input type="text" [(ngModel)]="element.label"/>
-  </div>
-  <div>
-    <span>Тип</span>
-    <input type="text" [(ngModel)]="element.type"/>
-  </div>
-  <div>
-    <span>Опции</span>
-    <input type="text" [(ngModel)]="element.options"/>
-  </div>
+<ng-container [ngSwitch]="configType">
+  <ng-container *ngSwitchCase="elementTypeEnum.SET">
+    <ng-container *ngIf="config">
+      <div>
+        <span>Легенда</span>
+        <input type="text" [(ngModel)]="config.legend">
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngSwitchCase="elementTypeEnum.FIELD">
+    <ng-container *ngIf="config">
+      <div>
+        <span>Название поля</span>
+        <span>{{config.name}}</span>
+      </div>
+      <div>
+        <span>Заголовок</span>
+        <input type="text" [(ngModel)]="config.label"/>
+      </div>
+      <div>
+        <span>Тип</span>
+        <input type="text" [(ngModel)]="config.type"/>
+      </div>
+      <div>
+        <span>Опции</span>
+        <input type="text" [(ngModel)]="config.options"/>
+      </div>
+    </ng-container>
+  </ng-container>
 </ng-container>
+
+

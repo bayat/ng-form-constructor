@@ -1,5 +1,5 @@
-<fieldset>
-  <legend>Легенда</legend>
+<fieldset (click)="changeSelectedElement()">
+  <legend *ngIf="data.legend">{{data.legend}}</legend>
   <div class="columns-container">
     <app-cz-column *ngFor="let column of createRange()">
     </app-cz-column>

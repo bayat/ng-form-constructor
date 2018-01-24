@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {CzComponent} from '../cz-component';
 import {FormConstructorService} from '../../../services/form-constructor.service';
+import {ElementType} from '../../../enums/element-type.enum';
 
 @Component({
   selector: 'app-cz-field',
@@ -9,7 +10,7 @@ import {FormConstructorService} from '../../../services/form-constructor.service
   encapsulation: ViewEncapsulation.None
 })
 export class CzFieldComponent implements OnInit, CzComponent {
-  data: any;
+  @Input() data: any;
 
   constructor(private formConstructorService: FormConstructorService) {
   }
@@ -21,8 +22,8 @@ export class CzFieldComponent implements OnInit, CzComponent {
     console.info(e, 'field drag event');
   }
 
-  clickOnField() {
-    this.formConstructorService.currentElementChanged$.next(this.data);
+  changeSelectedElement(e) {
+    this.formConstructorService.currentElementChanged$.next({'type': ElementType.FIELD, 'config': this.data});
+    e.stopPropagation();
   }
-
 }

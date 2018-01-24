@@ -16,8 +16,4 @@ export class FormConstructorComponent implements OnInit {
   ngOnInit() {
   }
 
-  setCurrentElement(event) {
-    this.editor.setElement(event);
-  }
-
 }
