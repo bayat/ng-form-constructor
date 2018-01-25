@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {PropEditorComponent} from './prop-editor/prop-editor.component';
+import {FormConstructorService} from '../services/form-constructor.service';
 
 @Component({
   selector: 'app-form-constructor',
@@ -10,7 +11,7 @@ import {PropEditorComponent} from './prop-editor/prop-editor.component';
 export class FormConstructorComponent implements OnInit {
   @ViewChild(PropEditorComponent) editor: PropEditorComponent;
 
-  constructor() {
+  constructor(private formConstructorService: FormConstructorService) {
   }
 
   ngOnInit() {
