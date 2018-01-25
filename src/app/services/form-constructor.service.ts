@@ -38,4 +38,36 @@ export class FormConstructorService {
     ];
   }
 
+  getFormConfig(): FormConfig {
+    return {
+      sets: [
+        {
+          legend: 'Общая информация',
+          columns: [
+            {
+              fields: [
+                {name: 'orderNum', type: 'text', label: '№ приказа', options: ''}
+              ]
+            }
+          ]
+        },
+        {
+          legend: '',
+          columns: [
+            {
+              fields: [
+                {name: 'assignees', type: 'person', label: 'Исполнители', options: ''}
+              ]
+            },
+            {
+              fields: [
+                {name: 'responsible', type: 'responsible', label: 'Ответственный', options: ''}
+              ]
+            }
+          ]
+        }
+      ]
+    };
+  }
+
 }
