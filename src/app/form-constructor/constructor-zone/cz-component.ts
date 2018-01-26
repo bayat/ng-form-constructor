@@ -1,4 +1,4 @@
 export interface CzComponent {
-  data: any;
+  config: any;
   ref: any;
 }

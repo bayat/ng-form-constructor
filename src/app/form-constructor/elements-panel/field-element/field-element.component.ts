@@ -19,6 +19,6 @@ export class FieldElementComponent implements OnInit {
 
   drag(e) {
     e.dataTransfer.setData('type', ElementType.FIELD);
-    e.dataTransfer.setData('data', JSON.stringify(this.config));
+    e.dataTransfer.setData('config', JSON.stringify(this.config));
   }
 }

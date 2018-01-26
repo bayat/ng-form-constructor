@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {CzComponent} from '../cz-component';
-import {FormConstructorService} from '../../../services/form-constructor.service';
+import {FieldConfig, FormConstructorService} from '../../../services/form-constructor.service';
 import {ElementType} from '../../../enums/element-type.enum';
 
 @Component({
@@ -9,9 +9,9 @@ import {ElementType} from '../../../enums/element-type.enum';
   styleUrls: ['./cz-field.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class CzFieldComponent implements OnInit, CzComponent {
+export class CzFieldComponent implements OnInit, OnDestroy, CzComponent {
   ref: any;
-  @Input() data: any;
+  @Input() config: FieldConfig;
 
   constructor(private formConstructorService: FormConstructorService) {
   }
@@ -24,7 +24,12 @@ export class CzFieldComponent implements OnInit, CzComponent {
   }
 
   changeSelectedElement(e) {
-    this.formConstructorService.currentElementChanged$.next({'type': ElementType.FIELD, 'config': this.data, 'componentRef': this.ref});
+    this.formConstructorService.currentElementChanged$.next({'type': ElementType.FIELD, 'config': this.config, 'componentRef': this.ref});
     e.stopPropagation();
   }
+
+  ngOnDestroy(): void {
+    console.log('fieldComponent destroy');
+  }
+
 }

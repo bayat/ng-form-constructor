@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
 import {CzComponent} from '../cz-component';
-import {FormConstructorService} from '../../../services/form-constructor.service';
+import {FormConstructorService, SetConfig} from '../../../services/form-constructor.service';
 import {ElementType} from '../../../enums/element-type.enum';
+import {CzColumnComponent} from '../cz-column/cz-column.component';
 
 @Component({
   selector: 'app-cz-set',
@@ -9,29 +10,36 @@ import {ElementType} from '../../../enums/element-type.enum';
   styleUrls: ['./cz-set.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class CzSetComponent implements OnInit, CzComponent {
+export class CzSetComponent implements OnInit, CzComponent, OnDestroy {
+  @ViewChild('columnContainer', {read: ViewContainerRef}) container;
   ref: any;
-  data: any;
+  config: SetConfig;
 
-  constructor(private formConstructorService: FormConstructorService) {
+  constructor(private formConstructorService: FormConstructorService,
+              private resolver: ComponentFactoryResolver) {
   }
 
   ngOnInit() {
+    this.initColumns();
   }
 
-  createRange() {
-    const items = [];
-    for (let i = 0; i < this.data.columns; i++) {
-      items.push(i);
-    }
-    return items;
+  initColumns() {
+    const factory = this.resolver.resolveComponentFactory(CzColumnComponent);
+    this.config.columns.forEach(column => {
+      const componentRef = this.container.createComponent(factory);
+      (<CzComponent>componentRef.instance).config = column;
+      (<CzComponent>componentRef.instance).ref = componentRef;
+    });
   }
 
   changeSelectedElement() {
     this.formConstructorService.currentElementChanged$.next(
-      {'type': ElementType.SET, 'config': this.data, 'componentRef': this.ref}
+      {'type': ElementType.SET, 'config': this.config, 'componentRef': this.ref}
     );
   }
 
+  ngOnDestroy(): void {
+    console.log('SetComponent destroy');
+  }
 
 }

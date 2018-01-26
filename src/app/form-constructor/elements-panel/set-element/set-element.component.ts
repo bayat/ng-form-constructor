@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {ElementType} from '../../../enums/element-type.enum';
+import {SetConfig} from '../../../services/form-constructor.service';
 
 @Component({
   selector: 'app-set-element',
@@ -19,7 +20,11 @@ export class SetElementComponent implements OnInit {
 
   drag(e) {
     e.dataTransfer.setData('type', ElementType.SET);
-    e.dataTransfer.setData('data', JSON.stringify({'columns': this.columns}));
+    const config = new SetConfig();
+    for (let i = 0; i < this.columns; i++) {
+      config.columns.push({fields: []});
+    }
+    e.dataTransfer.setData('config', JSON.stringify(config));
   }
 
 }

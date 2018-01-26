@@ -1,6 +1,5 @@
-import {Component, ComponentFactoryResolver, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-import {DropZoneDirective} from '../drop-zone.directive';
-import {FormConstructorService} from '../../services/form-constructor.service';
+import {Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
+import {FormConfig} from '../../services/form-constructor.service';
 import {CzComponent} from './cz-component';
 import {ElementType} from '../../enums/element-type.enum';
 import {CzSetComponent} from './cz-set/cz-set.component';
@@ -12,13 +11,23 @@ import {CzSetComponent} from './cz-set/cz-set.component';
   encapsulation: ViewEncapsulation.None
 })
 export class ConstructorZoneComponent implements OnInit {
-  @Output() onClicked = new EventEmitter<any>();
-  @ViewChild(DropZoneDirective) dropZone: DropZoneDirective;
+  @Input() formConfig: FormConfig;
+  @ViewChild('setContainer', {read: ViewContainerRef}) container;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private resolver: ComponentFactoryResolver) {
   }
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  initForm() {
+    const factory = this.resolver.resolveComponentFactory(CzSetComponent);
+    this.formConfig.sets.forEach(set => {
+      const componentRef = this.container.createComponent(factory);
+      (<CzComponent>componentRef.instance).config = set;
+      (<CzComponent>componentRef.instance).ref = componentRef;
+    });
   }
 
   drop(e) {
@@ -28,13 +37,12 @@ export class ConstructorZoneComponent implements OnInit {
     e.preventDefault();
     const dataTransfer = e.dataTransfer;
     const type = dataTransfer.getData('type');
-    const data = JSON.parse(dataTransfer.getData('data'));
+    const config = JSON.parse(dataTransfer.getData('config'));
 
     if (type == ElementType.SET) {
-      const viewContainerRef = this.dropZone.viewContainerRef;
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(CzSetComponent);
-      const componentRef = viewContainerRef.createComponent(componentFactory);
-      (<CzComponent>componentRef.instance).data = data;
+      const factory = this.resolver.resolveComponentFactory(CzSetComponent);
+      const componentRef = this.container.createComponent(factory);
+      (<CzComponent>componentRef.instance).config = config;
       (<CzComponent>componentRef.instance).ref = componentRef;
     }
   }

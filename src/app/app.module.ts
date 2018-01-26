@@ -11,7 +11,6 @@ import {ElementsPanelComponent} from './form-constructor/elements-panel/elements
 import {FieldElementComponent} from './form-constructor/elements-panel/field-element/field-element.component';
 import {SetElementComponent} from './form-constructor/elements-panel/set-element/set-element.component';
 import {FormConstructorService} from './services/form-constructor.service';
-import {DropZoneDirective} from './form-constructor/drop-zone.directive';
 import {CzSetComponent} from './form-constructor/constructor-zone/cz-set/cz-set.component';
 import {CzFieldComponent} from './form-constructor/constructor-zone/cz-field/cz-field.component';
 import { CzColumnComponent } from './form-constructor/constructor-zone/cz-column/cz-column.component';
@@ -25,7 +24,6 @@ import { CzColumnComponent } from './form-constructor/constructor-zone/cz-column
     ElementsPanelComponent,
     FieldElementComponent,
     SetElementComponent,
-    DropZoneDirective,
     CzSetComponent,
     CzFieldComponent,
     CzColumnComponent,
@@ -36,7 +34,7 @@ import { CzColumnComponent } from './form-constructor/constructor-zone/cz-column
     HttpModule
   ],
   providers: [FormConstructorService],
-  entryComponents: [CzSetComponent, CzFieldComponent],
+  entryComponents: [CzSetComponent, CzColumnComponent, CzFieldComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
