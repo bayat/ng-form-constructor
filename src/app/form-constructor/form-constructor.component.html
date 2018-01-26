@@ -1,3 +1,6 @@
+<div class="toolbar" style="{min-height: 50px; background-color: gray}">
+  <button (click)="saveConfig()">Сохранить конфиг</button>
+</div>
 <div class="content">
   <app-elements-panel></app-elements-panel>
   <app-constructor-zone *ngIf="formConfigReady" [formConfig]="formConfig"></app-constructor-zone>

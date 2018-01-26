@@ -22,4 +22,8 @@ export class FormConstructorComponent implements OnInit {
     this.formConfigReady = true;
   }
 
+  saveConfig() {
+    console.info(this.formConfig);
+  }
+
 }
