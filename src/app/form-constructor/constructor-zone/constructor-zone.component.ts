@@ -40,6 +40,7 @@ export class ConstructorZoneComponent implements OnInit {
 
     if (type == ElementType.SET) {
       this.createSet(config);
+      this.formConfig.sets.push(config);
     }
   }
 
