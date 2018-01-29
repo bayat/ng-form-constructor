@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
-import {FormConfig} from '../../services/form-constructor.service';
+import {FormConfig, SetConfig} from '../../services/form-constructor.service';
 import {CzComponent} from './cz-component';
 import {ElementType} from '../../enums/element-type.enum';
 import {CzSetComponent} from './cz-set/cz-set.component';
@@ -13,20 +13,19 @@ import {CzSetComponent} from './cz-set/cz-set.component';
 export class ConstructorZoneComponent implements OnInit {
   @Input() formConfig: FormConfig;
   @ViewChild('setContainer', {read: ViewContainerRef}) container;
+  private factory;
 
   constructor(private resolver: ComponentFactoryResolver) {
   }
 
   ngOnInit() {
+    this.factory = this.resolver.resolveComponentFactory(CzSetComponent);
     this.initForm();
   }
 
   initForm() {
-    const factory = this.resolver.resolveComponentFactory(CzSetComponent);
     this.formConfig.sets.forEach(set => {
-      const componentRef = this.container.createComponent(factory);
-      (<CzComponent>componentRef.instance).config = set;
-      (<CzComponent>componentRef.instance).ref = componentRef;
+      this.createSet(set);
     });
   }
 
@@ -40,11 +39,14 @@ export class ConstructorZoneComponent implements OnInit {
     const config = JSON.parse(dataTransfer.getData('config'));
 
     if (type == ElementType.SET) {
-      const factory = this.resolver.resolveComponentFactory(CzSetComponent);
-      const componentRef = this.container.createComponent(factory);
-      (<CzComponent>componentRef.instance).config = config;
-      (<CzComponent>componentRef.instance).ref = componentRef;
+      this.createSet(config);
     }
+  }
+
+  createSet(setConfig: SetConfig) {
+    const componentRef = this.container.createComponent(this.factory);
+    (<CzComponent>componentRef.instance).config = setConfig;
+    (<CzComponent>componentRef.instance).ref = componentRef;
   }
 
 }

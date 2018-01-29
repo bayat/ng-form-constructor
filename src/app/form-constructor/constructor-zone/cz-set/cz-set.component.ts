@@ -1,6 +1,6 @@
 import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
 import {CzComponent} from '../cz-component';
-import {FormConstructorService, SetConfig} from '../../../services/form-constructor.service';
+import {ColumnConfig, FormConstructorService, SetConfig} from '../../../services/form-constructor.service';
 import {ElementType} from '../../../enums/element-type.enum';
 import {CzColumnComponent} from '../cz-column/cz-column.component';
 
@@ -14,22 +14,27 @@ export class CzSetComponent implements OnInit, CzComponent, OnDestroy {
   @ViewChild('columnContainer', {read: ViewContainerRef}) container;
   ref: any;
   config: SetConfig;
+  factory;
 
   constructor(private formConstructorService: FormConstructorService,
               private resolver: ComponentFactoryResolver) {
   }
 
   ngOnInit() {
+    this.factory = this.resolver.resolveComponentFactory(CzColumnComponent);
     this.initColumns();
   }
 
   initColumns() {
-    const factory = this.resolver.resolveComponentFactory(CzColumnComponent);
     this.config.columns.forEach(column => {
-      const componentRef = this.container.createComponent(factory);
-      (<CzComponent>componentRef.instance).config = column;
-      (<CzComponent>componentRef.instance).ref = componentRef;
+      this.createColumn(column);
     });
+  }
+
+  createColumn(columnConfig: ColumnConfig) {
+    const componentRef = this.container.createComponent(this.factory);
+    (<CzComponent>componentRef.instance).config = columnConfig;
+    (<CzComponent>componentRef.instance).ref = componentRef;
   }
 
   changeSelectedElement() {
