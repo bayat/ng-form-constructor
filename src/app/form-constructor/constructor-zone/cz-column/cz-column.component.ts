@@ -44,6 +44,7 @@ export class CzColumnComponent implements OnInit, CzComponent {
 
     if (type == ElementType.FIELD) {
       this.createField(config);
+      this.config.fields.push(config);
     }
     e.stopPropagation();
   }

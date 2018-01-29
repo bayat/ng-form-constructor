@@ -18,22 +18,10 @@ export class PropEditorComponent implements OnInit {
 
   ngOnInit() {
     this.formConstructorService.currentElementChanged$.subscribe(data => {
-      this.setConfig(data.config);
-      this.setConfigType(data.type);
-      this.setComponentRef(data.componentRef);
+      this.config = data.config;
+      this.configType = data.type;
+      this.componentRef = data.componentRef;
     });
-  }
-
-  setConfig(config) {
-    this.config = config;
-  }
-
-  setConfigType(type: ElementType) {
-    this.configType = type;
-  }
-
-  setComponentRef(componentRef: any) {
-    this.componentRef = componentRef;
   }
 
   deleteComponent() {
@@ -42,9 +30,9 @@ export class PropEditorComponent implements OnInit {
   }
 
   clear() {
-    this.setConfig(null);
-    this.setConfigType(null);
-    this.setComponentRef(null);
+    this.config = null;
+    this.configType = null;
+    this.componentRef = null;
   }
 
 }

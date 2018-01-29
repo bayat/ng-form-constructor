@@ -1,15 +1,14 @@
-<ng-container [ngSwitch]="configType">
-  <ng-container *ngSwitchCase="elementTypeEnum.SET">
-    <ng-container *ngIf="config">
-      <div>
-        <span>Легенда</span>
-        <input type="text" [(ngModel)]="config.legend">
-      </div>
-      <button (click)="deleteComponent()">Удалить компонент</button>
+<ng-container *ngIf="config">
+  <ng-container [ngSwitch]="configType">
+    <ng-container *ngSwitchCase="elementTypeEnum.SET">
+      <ng-container *ngIf="config">
+        <div>
+          <span>Легенда</span>
+          <input type="text" [(ngModel)]="config.legend">
+        </div>
+      </ng-container>
     </ng-container>
-  </ng-container>
-  <ng-container *ngSwitchCase="elementTypeEnum.FIELD">
-    <ng-container *ngIf="config">
+    <ng-container *ngSwitchCase="elementTypeEnum.FIELD">
       <div>
         <span>Название поля</span>
         <span>{{config.name}}</span>
@@ -26,9 +25,9 @@
         <span>Опции</span>
         <input type="text" [(ngModel)]="config.options"/>
       </div>
-      <button (click)="deleteComponent()">Удалить компонент</button>
     </ng-container>
   </ng-container>
+  <button (click)="deleteComponent()">Удалить компонент</button>
 </ng-container>
 
 
