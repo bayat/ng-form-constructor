@@ -1,5 +1,4 @@
-import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
-import {CzComponent} from '../cz-component';
+import {Component, ComponentFactoryResolver, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
 import {ColumnConfig, FormConstructorService, SetConfig} from '../../../services/form-constructor.service';
 import {ElementType} from '../../../enums/element-type.enum';
 import {CzColumnComponent} from '../cz-column/cz-column.component';
@@ -10,11 +9,13 @@ import {CzColumnComponent} from '../cz-column/cz-column.component';
   styleUrls: ['./cz-set.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class CzSetComponent implements OnInit, CzComponent, OnDestroy {
+export class CzSetComponent implements OnInit, OnDestroy {
   @ViewChild('columnContainer', {read: ViewContainerRef}) container;
-  ref: any;
-  config: SetConfig;
-  factory;
+  @Input() ref: any;
+  @Input() config: SetConfig;
+  @Input() index: number;
+  @Output() setDeletedEvent = new EventEmitter<number>();
+  private factory;
 
   constructor(private formConstructorService: FormConstructorService,
               private resolver: ComponentFactoryResolver) {
@@ -33,8 +34,7 @@ export class CzSetComponent implements OnInit, CzComponent, OnDestroy {
 
   createColumn(columnConfig: ColumnConfig) {
     const componentRef = this.container.createComponent(this.factory);
-    (<CzComponent>componentRef.instance).config = columnConfig;
-    (<CzComponent>componentRef.instance).ref = componentRef;
+    (<CzColumnComponent>componentRef.instance).config = columnConfig;
   }
 
   changeSelectedElement() {
@@ -44,7 +44,7 @@ export class CzSetComponent implements OnInit, CzComponent, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('SetComponent destroy');
+    this.setDeletedEvent.emit(this.index);
   }
 
 }

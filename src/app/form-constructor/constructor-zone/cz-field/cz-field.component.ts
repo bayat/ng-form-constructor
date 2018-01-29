@@ -1,5 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {CzComponent} from '../cz-component';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FieldConfig, FormConstructorService} from '../../../services/form-constructor.service';
 import {ElementType} from '../../../enums/element-type.enum';
 
@@ -9,9 +8,11 @@ import {ElementType} from '../../../enums/element-type.enum';
   styleUrls: ['./cz-field.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class CzFieldComponent implements OnInit, OnDestroy, CzComponent {
-  ref: any;
+export class CzFieldComponent implements OnInit, OnDestroy {
+  @Input() ref: any;
   @Input() config: FieldConfig;
+  @Input() index: number;
+  @Output() fieldDeletedEvent = new EventEmitter<number>();
 
   constructor(private formConstructorService: FormConstructorService) {
   }
@@ -29,7 +30,7 @@ export class CzFieldComponent implements OnInit, OnDestroy, CzComponent {
   }
 
   ngOnDestroy(): void {
-    console.log('fieldComponent destroy');
+    this.fieldDeletedEvent.emit(this.index);
   }
 
 }

@@ -1,7 +1,6 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
+import {Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
 import {ElementType} from '../../../enums/element-type.enum';
 import {CzFieldComponent} from '../cz-field/cz-field.component';
-import {CzComponent} from '../cz-component';
 import {ColumnConfig, FieldConfig} from '../../../services/form-constructor.service';
 
 @Component({
@@ -10,11 +9,11 @@ import {ColumnConfig, FieldConfig} from '../../../services/form-constructor.serv
   styleUrls: ['./cz-column.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class CzColumnComponent implements OnInit, CzComponent {
+export class CzColumnComponent implements OnInit {
   @ViewChild('fieldContainer', {read: ViewContainerRef}) container;
-  ref: any;
-  factory;
-  config: ColumnConfig;
+  @Input() config: ColumnConfig;
+  private factory;
+  private fieldIndex = 0;
 
   constructor(private resolver: ComponentFactoryResolver) {
   }
@@ -32,8 +31,14 @@ export class CzColumnComponent implements OnInit, CzComponent {
 
   createField(fieldConfig: FieldConfig) {
     const componentRef = this.container.createComponent(this.factory);
-    (<CzComponent>componentRef.instance).config = fieldConfig;
-    (<CzComponent>componentRef.instance).ref = componentRef;
+    (<CzFieldComponent>componentRef.instance).config = fieldConfig;
+    (<CzFieldComponent>componentRef.instance).ref = componentRef;
+    (<CzFieldComponent>componentRef.instance).index = this.fieldIndex++;
+    (<CzFieldComponent>componentRef.instance).fieldDeletedEvent.subscribe(index => this.deleteField(index));
+  }
+
+  deleteField(fieldIndex) {
+    this.config.fields.splice(fieldIndex, 1);
   }
 
   drop(e) {

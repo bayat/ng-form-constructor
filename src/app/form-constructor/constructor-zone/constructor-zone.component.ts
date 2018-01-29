@@ -1,6 +1,5 @@
 import {Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
 import {FormConfig, SetConfig} from '../../services/form-constructor.service';
-import {CzComponent} from './cz-component';
 import {ElementType} from '../../enums/element-type.enum';
 import {CzSetComponent} from './cz-set/cz-set.component';
 
@@ -14,6 +13,7 @@ export class ConstructorZoneComponent implements OnInit {
   @Input() formConfig: FormConfig;
   @ViewChild('setContainer', {read: ViewContainerRef}) container;
   private factory;
+  private setIndex = 0;
 
   constructor(private resolver: ComponentFactoryResolver) {
   }
@@ -29,6 +29,18 @@ export class ConstructorZoneComponent implements OnInit {
     });
   }
 
+  createSet(setConfig: SetConfig) {
+    const componentRef = this.container.createComponent(this.factory);
+    (<CzSetComponent>componentRef.instance).config = setConfig;
+    (<CzSetComponent>componentRef.instance).ref = componentRef;
+    (<CzSetComponent>componentRef.instance).index = this.setIndex++;
+    (<CzSetComponent>componentRef.instance).setDeletedEvent.subscribe(index => this.deleteSet(index));
+  }
+
+  deleteSet(setIndex) {
+    this.formConfig.sets.splice(setIndex, 1);
+  }
+
   drop(e) {
     if (e.target.className.indexOf('cz-content') === -1) {
       return;
@@ -42,12 +54,6 @@ export class ConstructorZoneComponent implements OnInit {
       this.createSet(config);
       this.formConfig.sets.push(config);
     }
-  }
-
-  createSet(setConfig: SetConfig) {
-    const componentRef = this.container.createComponent(this.factory);
-    (<CzComponent>componentRef.instance).config = setConfig;
-    (<CzComponent>componentRef.instance).ref = componentRef;
   }
 
 }
